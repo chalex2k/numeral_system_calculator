@@ -22,6 +22,16 @@ class ChromeSearch(unittest.TestCase):
         input_field = self.driver.find_element(By.CSS_SELECTOR, "input[placeholder='Введите число']")
         self.assertIsNotNone(input_field)
 
+    def test_radio_buttons_group(self):
+        """ Наличие переключателей Стартовая система счисления"""
+        self.driver.get(self.index_html_path)
+        legend = self.driver.find_element(By.XPATH, "//fieldset/legend")
+        self.assertEqual(legend.text, "Стартовая система счисления")
+        expected_options = ["Двоичная", "Троичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная", "Пользовательская"]
+        for option in expected_options:
+            label = self.driver.find_element(By.XPATH, f"//label[text()='{option}']")
+            self.assertTrue(label.is_displayed())
+
     def tearDown(self):
         self.driver.close()
 
