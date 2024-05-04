@@ -1,6 +1,7 @@
 import os
 import unittest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 
 class ChromeSearch(unittest.TestCase):
@@ -14,6 +15,12 @@ class ChromeSearch(unittest.TestCase):
         self.driver.get(self.index_html_path)
 
         self.assertEqual(self.driver.title, "Калькулятор")
+
+    def test_input_field_placeholder(self):
+        """ Наличие поля ввода с placeholder='Введите число'"""
+        self.driver.get(self.index_html_path)
+        input_field = self.driver.find_element(By.CSS_SELECTOR, "input[placeholder='Введите число']")
+        self.assertIsNotNone(input_field)
 
     def tearDown(self):
         self.driver.close()
