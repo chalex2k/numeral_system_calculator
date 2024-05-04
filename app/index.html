@@ -11,6 +11,35 @@
 <main>
     <h1>Калькулятор перевода из одной системы счисления в другую</h1>
     <input type="text" placeholder="Введите число">
+
+    <fieldset>
+        <legend>Стартовая система счисления</legend>
+        <div>
+            <input type="radio" id="binary" name="number_system" value="binary" checked/>
+            <label for="binary">Двоичная</label>
+        </div>
+        <div>
+            <input type="radio" id="ternary" name="number_system" value="ternary"/>
+            <label for="ternary">Троичная</label>
+        </div>
+        <div>
+            <input type="radio" id="octal" name="number_system" value="octal"/>
+            <label for="octal">Восьмеричная</label>
+        </div>
+        <div>
+            <input type="radio" id="decimal" name="number_system" value="decimal"/>
+            <label for="decimal">Десятичная</label>
+        </div>
+        <div>
+            <input type="radio" id="hexadecimal" name="number_system" value="hexadecimal"/>
+            <label for="hexadecimal">Шестнадцатеричная</label>
+        </div>
+        <div>
+            <input type="radio" id="custom" name="number_system" value="custom"/>
+            <label for="custom">Пользовательская</label>
+        </div>
+    </fieldset>
+
 </main>
 <script src="index.js"></script>
 </body>
