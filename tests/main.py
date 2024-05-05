@@ -27,10 +27,32 @@ class ChromeSearch(unittest.TestCase):
         self.driver.get(self.index_html_path)
         legend = self.driver.find_element(By.XPATH, "//fieldset/legend")
         self.assertEqual(legend.text, "Стартовая система счисления")
-        expected_options = ["Двоичная", "Троичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная", "Пользовательская"]
+        expected_options = ("Двоичная", "Троичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная",
+                            "Пользовательская")
         for option in expected_options:
             label = self.driver.find_element(By.XPATH, f"//label[text()='{option}']")
             self.assertTrue(label.is_displayed())
+
+    def test_custom_input_appears(self):
+        """ При выборе опции пользовательская появляется поле для кастомной СС """
+        self.driver.get(self.index_html_path)
+        fieldset = self.driver.find_element(By.XPATH, "//fieldset[legend='Стартовая система счисления']")
+
+        custom_radio_button = fieldset.find_element(By.ID, "custom")
+        custom_radio_button.click()
+        custom_input = fieldset.find_element(By.CSS_SELECTOR, "input[placeholder='Введите Вашу систему счисления']")
+        self.assertTrue(custom_input.is_displayed())
+
+    def test_custom_input_disappears(self):
+        """ При выборе любых других опций поле для кастомной СС скрыто """
+        self.driver.get(self.index_html_path)
+        fieldset = self.driver.find_element(By.XPATH, "//fieldset[legend='Стартовая система счисления']")
+
+        for rb in ("binary", "ternary", "octal", "decimal", "hexadecimal"):
+            non_custom_radio_button = fieldset.find_element(By.ID, rb)
+            non_custom_radio_button.click()
+            custom_input = fieldset.find_element(By.CSS_SELECTOR, "input[placeholder='Введите Вашу систему счисления']")
+            self.assertFalse(custom_input.is_displayed())
 
     def tearDown(self):
         self.driver.close()
