@@ -86,6 +86,18 @@ class ChromeSearch(unittest.TestCase):
             custom_input = fieldset.find_element(By.CSS_SELECTOR, "input[placeholder='Введите Вашу систему счисления']")
             self.assertFalse(custom_input.is_displayed())
 
+    def test_convert_button_exists(self):
+        """Проверка наличия кнопки 'Перевести'"""
+        self.driver.get(self.index_html_path)
+        convert_button = self.driver.find_element(By.ID, "convertButton")
+        self.assertTrue(convert_button.is_displayed())
+
+    def test_output_label_exists(self):
+        """Проверка наличия лейбла для вывода результата"""
+        self.driver.get(self.index_html_path)
+        output_label = self.driver.find_element(By.ID, "outputResult")
+        self.assertTrue(output_label.is_displayed())
+
     def tearDown(self):
         self.driver.close()
 
