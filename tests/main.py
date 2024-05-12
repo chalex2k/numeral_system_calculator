@@ -125,7 +125,7 @@ class ChromeSearch(unittest.TestCase):
             input_field.send_keys(t.val_src)
             self.driver.find_element(By.ID, "convertButton").click()
             result_label = self.driver.find_element(By.ID, "outputResult")
-            self.assertEqual(result_label.text, t.val_res)
+            self.assertEqual(result_label.text, "Результат: " + t.val_res)
 
     def tearDown(self):
         self.driver.close()

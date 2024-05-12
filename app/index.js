@@ -2,30 +2,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const radioButtons = document.querySelectorAll('input[name="number_system"]');
     const customInput = document.getElementById('customInput');
 
-    radioButtons.forEach(function(radioButton) {
-        radioButton.addEventListener('change', function() {
-            if (this.value === 'custom') {
-                customInput.style.display = 'block';
-            } else {
-                customInput.style.display = 'none';
-            }
-        });
-    });
+    visibleRadio(radioButtons, customInput)
+
 });
 
 document.addEventListener("DOMContentLoaded", function() {
     const radioButtons = document.querySelectorAll('input[name="result_system"]');
     const customInput = document.getElementById('customResultInput');
 
-    radioButtons.forEach(function(radioButton) {
-        radioButton.addEventListener('change', function() {
-            if (this.value === 'custom') {
-                customInput.style.display = 'block';
-            } else {
-                customInput.style.display = 'none';
-            }
-        });
-    });
+    visibleRadio(radioButtons, customInput)
 });
 
 function convertNumber() {
@@ -44,12 +29,24 @@ function convertNumber() {
         resultSystem = document.getElementById("customResultValue").value.trim();
         resultSystem = parseInt(resultSystem)
     }
-    
+
     var decimalNumber = parseInt(inputNumber, startSystem);
 
     var convertedNumber = decimalNumber.toString(resultSystem);
 
-    document.getElementById("outputResult").textContent = convertedNumber;
+    document.getElementById("outputResult").textContent = "Результат: " + convertedNumber;
+}
+
+function visibleRadio(radioButtons, customInput) {
+        radioButtons.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+            }
+        });
+    });
 }
 
 function getNumericSystem(systemName) {
