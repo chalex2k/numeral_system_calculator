@@ -41,10 +41,38 @@
         <div id="customInput" style="display: none;">
             <input type="text" id="customValue" placeholder="Введите Вашу систему счисления">
         </div>
-
-
     </fieldset>
 
+    <fieldset>
+        <legend>Итоговая система счисления</legend>
+        <div>
+            <input type="radio" id="binaryResult" name="result_system" value="binary" checked/>
+            <label for="binaryResult">Двоичная</label>
+        </div>
+        <div>
+            <input type="radio" id="ternaryResult" name="result_system" value="ternary"/>
+            <label for="ternaryResult">Троичная</label>
+        </div>
+        <div>
+            <input type="radio" id="octalResult" name="result_system" value="octal"/>
+            <label for="octalResult">Восьмеричная</label>
+        </div>
+        <div>
+            <input type="radio" id="decimalResult" name="result_system" value="decimal"/>
+            <label for="decimalResult">Десятичная</label>
+        </div>
+        <div>
+            <input type="radio" id="hexadecimalResult" name="result_system" value="hexadecimal"/>
+            <label for="hexadecimalResult">Шестнадцатеричная</label>
+        </div>
+        <div>
+            <input type="radio" id="customResult" name="result_system" value="custom"/>
+            <label for="customResult">Пользовательская</label>
+        </div>
+        <div id="customResultInput" style="display: none;">
+            <input type="text" id="customResultValue" placeholder="Введите Вашу систему счисления">
+        </div>
+    </fieldset>
 </main>
 <script src="index.js"></script>
 </body>
