@@ -1,7 +1,9 @@
 import os
+import typing
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from collections import namedtuple
 
 
 class ChromeSearch(unittest.TestCase):
@@ -97,6 +99,33 @@ class ChromeSearch(unittest.TestCase):
         self.driver.get(self.index_html_path)
         output_label = self.driver.find_element(By.ID, "outputResult")
         self.assertTrue(output_label.is_displayed())
+
+    def test_convert_binary_to_decimal(self):
+        """Проверка перевода числа"""
+        TestCase = namedtuple("TestCase", 'radio_src val_src radio_res val_res')
+        tcs = [
+            TestCase(radio_src="binary", val_src="1010", radio_res="decimalResult", val_res="10"),
+            TestCase(radio_src="decimal", val_src="10", radio_res="binaryResult", val_res="1010"),
+            TestCase(radio_src="ternary", val_src="101", radio_res="decimalResult", val_res="10"),
+            TestCase(radio_src="octal", val_src="12", radio_res="decimalResult", val_res="10"),
+            TestCase(radio_src="hexadecimal", val_src="A", radio_res="decimalResult", val_res="10"),
+            TestCase(radio_src="binary", val_src="1010", radio_res="ternaryResult", val_res="101"),
+            TestCase(radio_src="decimal", val_src="10", radio_res="octalResult", val_res="12"),
+            TestCase(radio_src="ternary", val_src="101", radio_res="hexadecimalResult", val_res="a"),
+            TestCase(radio_src="octal", val_src="12", radio_res="binaryResult", val_res="1010"),
+            TestCase(radio_src="hexadecimal", val_src="A", radio_res="binaryResult", val_res="1010"),
+        ]
+
+        self.driver.get(self.index_html_path)
+        for t in tcs:
+            self.driver.find_element(By.ID, t.radio_src).click()
+            self.driver.find_element(By.ID, t.radio_res).click()
+            input_field = self.driver.find_element(By.ID, "inputNumber")
+            input_field.clear()
+            input_field.send_keys(t.val_src)
+            self.driver.find_element(By.ID, "convertButton").click()
+            result_label = self.driver.find_element(By.ID, "outputResult")
+            self.assertEqual(result_label.text, t.val_res)
 
     def tearDown(self):
         self.driver.close()
